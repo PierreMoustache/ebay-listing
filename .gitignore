@@ -1,3 +1,4 @@
 node_modules/
-dev/sources/
+.git/
+src/sources/
 package-lock.json

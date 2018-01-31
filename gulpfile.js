@@ -5,21 +5,23 @@ var gulp = require('gulp'),
   postcss = require('gulp-postcss'),
   autoprefixer = require('autoprefixer'),
   svgsprite = require('gulp-svg-sprite'),
+  imagemin = require('gulp-imagemin'),
+  cache = require('gulp-cache'),
   browsersync = require('browser-sync');
 
 
 // Compile html from pug
 gulp.task('html', function() {
-  return gulp.src('dev/*.pug')
-    .pipe(pug({
+  return gulp.src('src/*.pug')
+    .pipe(cache(pug({
       pretty: true
-    }))
+    })))
     .pipe(gulp.dest('dist/'));
 } );
 
 // Compile css from sass
 gulp.task('styles', function() {
-  return gulp.src('dev/*.sass')
+  return gulp.src('src/*.sass')
     .pipe(sourcemap.init())
     .pipe(sass({
       outputStyle: 'expanded',
@@ -31,13 +33,13 @@ gulp.task('styles', function() {
         cascade: true
       } )
     ] ))
-    .pipe(sourcemap.write('../dev/sourcemaps/'))
+    .pipe(sourcemap.write('../src/sourcemaps/'))
     .pipe(gulp.dest('dist/'));
 } );
 
 // Create icons spritesheet
 gulp.task('icons', function() {
-  return gulp.src('dev/icons/*.svg')
+  return gulp.src('src/icons/*.svg')
   	.pipe(svgsprite({
       log: "info",
       shape: {
@@ -54,11 +56,11 @@ gulp.task('icons', function() {
         css: {
           render: {
             scss: {
-              template: "dev/icons/template.scss",
+              template: "src/icons/template.scss",
               dest: "icons.scss"
             }
           },
-          dest: "dev/sass/",
+          dest: "src/sass/",
           prefix: ".icon-%s",
           layout: "diagonal",
           sprite: "../../dist/img/icons.svg",
@@ -70,14 +72,27 @@ gulp.task('icons', function() {
   	.pipe(gulp.dest('./'));
 });
 
+// Compress images
+gulp.task('images', function() {
+  return gulp.src('src/images/**/*')
+    // .pipe(cache('imgcache'))
+    .pipe(cache(imagemin({
+			interlaced: true,
+			progressive: true,
+			optimizationLevel: 5,
+      verbose: true
+		})))
+    .pipe(gulp.dest('dist/img/'));
+});
+
 
 
 // Watch for changes
 gulp.task('watch', function() {
-  gulp.watch(['dev/**/*.sass', 'dev/sass/*.scss'], gulp.series('styles', reload));
-	// gulp.watch('dev/images/**/*', gulp.series('images', reload));
-	gulp.watch(['dev/icons/*.svg', 'dev/icons/template.scss'], gulp.series('icons', 'styles', reload));
-  gulp.watch('dev/**/*.pug', gulp.series('html', reload));
+  gulp.watch(['src/**/*.sass', 'src/sass/*.scss'], gulp.series('styles', reload));
+	gulp.watch('src/images/**/*', gulp.series('images', reload));
+	gulp.watch(['src/icons/*.svg', 'src/icons/template.scss'], gulp.series('icons', 'styles', reload));
+  gulp.watch('src/**/*.pug', gulp.series('html', reload));
 });
 
 
@@ -99,4 +114,4 @@ function reload(done){
 
 
 // Development envirronement that watches every changes and reload the browser
-gulp.task('default', gulp.series(gulp.parallel('html', gulp.series('icons', 'styles')), gulp.parallel('browsersync', 'watch')));
+gulp.task('default', gulp.series(gulp.parallel('images', 'html', gulp.series('icons', 'styles')), gulp.parallel('browsersync', 'watch')));

@@ -1,7 +1,0 @@
-mixin images(...imgs)
-  each img, index in imgs
-    input(type="radio" name="ss" id=('ss-img-' + index) checked=(index === 0)).ss-bullet
-    .ss-img
-      img(src=imgPath + img)
-      label(for='ss-img-' + ((index + imgs.length - 1) % imgs.length)).ss-nav-prev Image précédente
-      label(for='ss-img-' + ((index + 1) % imgs.length)).ss-nav-next Image suivante

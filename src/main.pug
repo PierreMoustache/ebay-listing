@@ -1,0 +1,55 @@
+include pug/slideshow
+
+doctype html
+html(lang="fr")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet", href="styles.css")
+  body
+    .eb-wrap
+      .header
+        .shipping envoi rapide
+        .payment paiement sécurisé
+        .warranty satisfaction garantie
+        //- .lang-select
+        //-   input(type="checkbox" name="lang_fr" checked="checked")
+          //- input(type="checkbox" name="lang_uk")
+          
+      .product
+        .slideshow
+          +images(
+          'disc-default.jpg',
+          'disc-pochette.jpg',
+          'disc-enveloppe.jpg')
+          
+        .description
+          h2 Titre de l'objet
+          p description longue
+          ul
+            li feature 1
+            li feature 2
+            li feature 3
+          p description longue
+          ul
+            li feature 1
+            li feature 2
+            li feature 3
+      
+      .more
+      
+      .evaluations
+      
+      .cgv
+        .shipping
+          img(src="img/shipping.jpg" alt="")
+          p Livraison rapide avec numéro de suivi fourni à l'expédition
+        .payment
+          img(src="img/payment.jpg" alt="")
+          p Paiement sécurisé par Paypal ou par virement&nbspbancaire
+        .warranty
+          img(src="img/satisfaction.jpg" alt="")
+          p 100% d'acheteurs satisfaits depuis 2007 !
+      
+      .footer
+        p copyright &copy 2018 Pierre Moustache
