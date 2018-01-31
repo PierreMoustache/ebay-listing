@@ -1,0 +1,101 @@
+@import sass/icons
+
+& > div:not([class=responsive-wrap])
+  @include shadow(3px, 10px, 0.2)
+  padding: 0 $h-padding
+
+.produit
+  text-align: center
+  padding-bottom: 20px!important
+  & > h1:first-child
+    margin-bottom: 10px
+  & h1 + p
+    text-align: right
+    font-style: italic
+    margin-top: 0px
+.responsive-wrap
+  .box
+    position: relative
+    &::before
+      content: ""
+    // &.feature
+      position: relative
+      background-color: $color-darkgrey
+      color: white
+      border-top: 3px solid $color-grey
+      &::before
+        @include icon-star(1em)
+      &::after
+        position: absolute
+        z-index: -1
+        content: ""
+        bottom: 0
+        left: 0
+        right: 0
+        height: 10px
+        background-color: black
+        border-radius: 50%
+        filter: blur(5px)
+    &.shipping,
+    &.payment,
+    &.warranty
+      background-color: $color-green
+      color: white
+    &.payment::before
+      @include icon-shipping($icon-size)
+    &.shipping::before
+      @include icon-shipping($icon-size)
+    &.warranty::before
+      @include icon-thumbup($icon-size)
+// & > .responsive-wrap
+//   & .responsive-row
+//     border-spacing: $gutter 10px
+//     & .box
+//       padding-bottom: 20px
+//     & .box::after
+//       bottom: -1px
+
+// Slideshow :
+.slideshow
+  @include mobile
+    display: none
+.ss-bullet
+  background: $color-grey
+.ss-nav-prev::after,
+.ss-nav-next::after
+  content: '\25B6'
+  font-size: 3em
+  color: $color-darkgrey
+
+.entete
+  background-color: $color-blue
+  @include txt(inherit, center, white)
+  @include link(white, $color-blue, white)
+
+.pied
+  position: relative
+  background-color: $color-red
+  @include desktop
+    padding-left: 7.5em!important
+  @include mobile
+    padding-top: 7.5em!important
+  @include txt(inherit, center, white)
+  @include link(white, $color-darkgrey, white)
+  &::before
+    content: ""
+    position: absolute
+    @include desktop
+      left: $h-padding
+      top: 50%
+      transform: translateY(-50%)
+    @include icon-thumbup(6em)
+    @include mobile
+        top: $v-spacing
+        left: 50%
+        transform: translateX(-50%)
+
+
+&::after
+  content: "\00a9 2017 Pierre Moustache"
+  display: block
+  @include txt(0.5em, center, $color-darkgrey)

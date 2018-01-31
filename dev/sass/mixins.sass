@@ -1,0 +1,27 @@
+// Text styling
+@mixin txt($size, $position, $color)
+  text-align: $position
+  font-size: $size
+  color: $color
+
+// Links styling
+@mixin link($link, $hover, $background)
+  a
+    &:link
+      color: $link
+      text-decoration: none
+      border-bottom: 0.5px dotted $link
+    &:visited
+      color: $link
+    &:hover
+      color: $hover
+      background-color: $background
+      border: none
+    &:active
+      color: $link
+      background-color: transparent
+      border: 0.5px solid $link
+
+// Shadow
+@mixin shadow($dist, $size, $opacity)
+  box-shadow: 0 $dist $size rgba(0,0,0,$opacity)

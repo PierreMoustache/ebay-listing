@@ -1,0 +1,28 @@
+%icons-common {
+  display: inline-block;
+  background: url("img/icons.svg");
+}
+
+//--------------------------Usage--------------------------
+// Import @import "***/sprite.scss" in your main sass file.
+// Insert the mixin with the format:
+// "@include icon-iconname(icon size in px, em or rem)"
+// anywhere in your sass file.
+// Do NOT use padding on icons styles.
+// You can use margins.
+//---------------------------------------------------------
+
+{{#shapes}}
+@mixin icon-{{base}}($icon-size) {
+  @extend %icons-common;
+  height: {{height.inner}}px / {{height.inner}}px * $icon-size;
+	width: {{width.inner}}px / {{height.inner}}px * $icon-size;
+  background-size: {{spriteWidth}}px / {{height.inner}}px * $icon-size {{spriteHeight}}px / {{height.inner}}px * $icon-size;
+	background-position: {{position.relative.x}}% {{position.relative.y}}%;
+}
+
+.icon-{{base}} {
+  @include icon-{{base}}(1em);
+}
+
+{{/shapes}}

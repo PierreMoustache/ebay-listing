@@ -1,0 +1,74 @@
+%icons-common {
+  display: inline-block;
+  background: url("img/icons.svg");
+}
+
+//--------------------------Usage--------------------------
+// Import @import "***/sprite.scss" in your main sass file.
+// Insert the mixin with the format:
+// "@include icon-iconname(icon size in px, em or rem)"
+// anywhere in your sass file.
+// Do NOT use padding on icons styles.
+// You can use margins.
+//---------------------------------------------------------
+
+@mixin icon-lang_fr($icon-size) {
+  @extend %icons-common;
+  height: 32px / 32px * $icon-size;
+	width: 48px / 32px * $icon-size;
+  background-size: 240px / 32px * $icon-size 208px / 32px * $icon-size;
+	background-position: 0% 0%;
+}
+
+.icon-lang_fr {
+  @include icon-lang_fr(1em);
+}
+
+@mixin icon-lang_uk($icon-size) {
+  @extend %icons-common;
+  height: 32px / 32px * $icon-size;
+	width: 48px / 32px * $icon-size;
+  background-size: 240px / 32px * $icon-size 208px / 32px * $icon-size;
+	background-position: 25% 18.181818181818183%;
+}
+
+.icon-lang_uk {
+  @include icon-lang_uk(1em);
+}
+
+@mixin icon-payment($icon-size) {
+  @extend %icons-common;
+  height: 48px / 48px * $icon-size;
+	width: 48px / 48px * $icon-size;
+  background-size: 240px / 48px * $icon-size 208px / 48px * $icon-size;
+	background-position: 50% 40%;
+}
+
+.icon-payment {
+  @include icon-payment(1em);
+}
+
+@mixin icon-shipping($icon-size) {
+  @extend %icons-common;
+  height: 48px / 48px * $icon-size;
+	width: 48px / 48px * $icon-size;
+  background-size: 240px / 48px * $icon-size 208px / 48px * $icon-size;
+	background-position: 75% 70%;
+}
+
+.icon-shipping {
+  @include icon-shipping(1em);
+}
+
+@mixin icon-thumbup($icon-size) {
+  @extend %icons-common;
+  height: 48px / 48px * $icon-size;
+	width: 48px / 48px * $icon-size;
+  background-size: 240px / 48px * $icon-size 208px / 48px * $icon-size;
+	background-position: 100% 100%;
+}
+
+.icon-thumbup {
+  @include icon-thumbup(1em);
+}
+
